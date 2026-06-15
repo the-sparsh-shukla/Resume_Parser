@@ -1,101 +1,86 @@
-# Resume Parser — AI Tool 📄
+# Resume Parser
 
-Built this as **Project 1** for my Pinnacle Labs AI Internship (June 2026).
+A lightweight, client-side resume parsing app that turns pasted text or `.txt` uploads into structured candidate data using Anthropic Claude.
 
-The idea is simple — paste any resume, and the app uses Claude AI to pull out all the important info (name, skills, experience, contact etc.) and shows it in a clean layout. Also exports to JSON which can be used in HR tools or ATS systems.
+## Overview
 
----
+This project was built during my Pinnacle Labs AI Internship and focuses on a simple workflow: paste resume text, extract useful fields, and review the result in a clean tabbed interface. The output can be copied as JSON or downloaded for reuse in HR or ATS tools.
 
-## What it does
+## Features
 
-- Paste resume text or upload a `.txt` file
-- Sends it to the Claude API
-- Extracts: name, contact info, skills, work experience, education, certifications, achievements
-- Shows everything in a nice UI with tabs
-- Can copy or download the structured JSON
+- Accepts pasted resume text or `.txt` uploads
+- Sends content to the Claude API for structured extraction
+- Extracts name, contact details, summary, skills, experience, education, certifications, and achievements
+- Displays results in a clean UI with separate tabs
+- Lets you copy or download the parsed JSON
 
----
+## Tech Stack
 
-## Tech used
-
-- HTML, CSS, JavaScript (no frameworks, kept it simple)
+- HTML, CSS, and vanilla JavaScript
 - Anthropic Claude API (`claude-sonnet-4-20250514`)
-- Google Fonts (Inter)
+- Google Fonts (`Inter`)
 
-I didn't use React or anything like that — wanted to keep it pure JS so the code is easy to read and doesn't need a build step.
+The app is intentionally framework-free so it stays easy to read, easy to run, and does not require a build step.
 
----
+## Run Locally
 
-## How to run it
-
-Just open `index.html` in your browser. No server needed.
+Open `index.html` directly in your browser, or serve the folder with any static server.
 
 ```bash
-git clone https://github.com/the-sparsh-shukla/resume-parser.git
-cd resume-parser
-# open index.html in browser
+git clone https://github.com/the-sparsh-shukla/Resume_Parser.git
+cd Resume_Parser
 ```
 
 If you want a local server:
 
 ```bash
 python -m http.server 3000
-# then go to localhost:3000
 ```
 
----
+Then open `http://localhost:3000`.
 
 ## Setup
 
-You need an Anthropic API key. Get one from [console.anthropic.com](https://console.anthropic.com) (they give free credits).
+1. Get an Anthropic API key from [console.anthropic.com](https://console.anthropic.com).
+2. Paste the key into the app.
+3. Parse a resume and review the generated JSON.
 
-Paste it in the API key field in the app. It gets saved in your browser's localStorage so you don't have to enter it every time.
+The key is stored only in your browser and is never sent to this repository.
 
-> The key never goes to any server other than Anthropic's. This is a purely client-side app.
+## GitHub Pages
 
----
+This repository includes a GitHub Pages workflow in [`.github/workflows/pages.yml`](.github/workflows/pages.yml).
 
-## Project structure
+To publish the site:
+
+1. Push changes to the `main` branch.
+2. Open repository settings on GitHub.
+3. Go to Pages and select GitHub Actions as the source.
+
+After deployment, GitHub will provide the public site URL.
+
+## Project Structure
 
 ```
-resume-parser/
-├── index.html       # main page
+Resume_Parser/
+├── index.html
+├── README.md
 ├── src/
-│   ├── app.js       # all the logic — api calls, rendering, tabs etc
-│   └── style.css    # styles
-└── README.md
+│   ├── app.js
+│   └── style.css
+└── .gitignore
 ```
 
----
+## Notes
 
-## Screenshots
-
-> (add a screenshot of the app here before posting)
-
----
-
-## What I learned
-
-- How to use the Anthropic Claude API from a browser
-- Prompt engineering — getting Claude to return clean JSON reliably
-- Handling API errors (auth errors, rate limits etc)
-- CSS Grid for the two-panel layout
-
----
-
-## Things I'd add if I had more time
-
-- [ ] PDF support (currently only .txt)
-- [ ] Side-by-side comparison of two resumes
-- [ ] Score the resume against a job description
-- [ ] Better mobile UI
-
----
+- The app currently supports `.txt` input only.
+- All parsing happens in the browser after the Claude API request.
+- The UI is designed to be simple, readable, and easy to extend.
 
 ## License
 
-MIT — feel free to use/modify
+MIT
 
----
+## Author
 
-*Made by Sparsh Shukla · Pinnacle Labs AI Internship 2026*
+Sparsh Shukla
