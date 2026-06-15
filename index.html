@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Parser - AI Tool</title>
+  <link rel="stylesheet" href="src/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">📄 ResumeParser</div>
+    <div class="nav-right">
+      <a href="#about">About</a>
+      <a href="https://github.com/the-sparsh-shukla" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <!-- hero section -->
+  <div class="hero">
+    <h1>Parse Your Resume <span class="highlight">with AI</span></h1>
+    <p>Paste any resume and get structured info like skills, experience, contact — instantly using Claude AI.</p>
+    <p class="hero-sub">Built this as part of my Pinnacle Labs internship 🚀</p>
+  </div>
+
+  <!-- main app -->
+  <div class="container">
+
+    <!-- left side - input -->
+    <div class="card input-card">
+      <div class="card-top">
+        <h2>Input</h2>
+        <button id="sampleBtn" class="sample-btn">Try Sample Resume</button>
+      </div>
+
+      <!-- file upload -->
+      <div class="upload-box" id="dropZone">
+        <input type="file" id="fileInput" accept=".txt" />
+        <p>📂 Drop a .txt file here or <span>click to upload</span></p>
+      </div>
+
+      <p class="or-text">— or paste directly —</p>
+
+      <textarea
+        id="resumeText"
+        placeholder="Paste your resume text here...
+        
+John Doe
+Software Engineer | john@email.com
+Skills: Python, React, SQL..."
+      ></textarea>
+
+      <!-- api key input - added this later when i realized it was needed lol -->
+      <div class="apikey-section">
+        <label for="apiKey">🔑 Anthropic API Key</label>
+        <input
+          type="password"
+          id="apiKey"
+          placeholder="sk-ant-api03-..."
+          autocomplete="off"
+        />
+        <small>Your key is never stored on any server. Stays in your browser only.</small>
+      </div>
+
+      <button id="parseBtn" class="parse-btn">
+        ✨ Parse Resume
+      </button>
+
+      <!-- error message div -->
+      <div id="errorMsg" class="error-msg" style="display:none"></div>
+
+      <!-- loading state -->
+      <div id="loadingDiv" style="display:none" class="loading-div">
+        <div class="loader"></div>
+        <p id="loadingText">Sending to Claude...</p>
+      </div>
+    </div>
+
+    <!-- right side - results -->
+    <div class="card result-card" id="resultCard">
+
+      <!-- shown before parsing -->
+      <div id="emptyState" class="empty-state">
+        <div class="empty-icon">🤖</div>
+        <p>Results will show here</p>
+        <small>Paste a resume and click Parse</small>
+      </div>
+
+      <!-- actual results - hidden by default -->
+      <div id="resultContent" style="display:none">
+
+        <!-- person name + title at top -->
+        <div class="profile-box" id="profileBox"></div>
+
+        <!-- quick stats -->
+        <div class="stats-row" id="statsRow"></div>
+
+        <!-- tabs for different sections -->
+        <div class="tabs">
+          <button class="tab-btn active" onclick="showTab('contact')">Contact</button>
+          <button class="tab-btn" onclick="showTab('skills')">Skills</button>
+          <button class="tab-btn" onclick="showTab('experience')">Experience</button>
+          <button class="tab-btn" onclick="showTab('education')">Education</button>
+        </div>
+
+        <div id="tab-contact" class="tab-section"></div>
+        <div id="tab-skills" class="tab-section" style="display:none"></div>
+        <div id="tab-experience" class="tab-section" style="display:none"></div>
+        <div id="tab-education" class="tab-section" style="display:none"></div>
+
+        <!-- buttons at bottom -->
+        <div class="result-btns">
+          <button onclick="copyJSON()" class="btn-secondary">📋 Copy JSON</button>
+          <button onclick="downloadJSON()" class="btn-secondary">⬇️ Download</button>
+          <button onclick="resetAll()" class="btn-ghost">Parse Another</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- how it works section - added this for the readme/linkedin -->
+  <div class="how-section" id="about">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <h3>Paste Resume</h3>
+        <p>Upload a .txt file or just paste the resume text</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <h3>Claude Reads It</h3>
+        <p>Claude API analyzes the text and understands the structure</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <h3>Get Clean Data</h3>
+        <p>All info is extracted into neat JSON — skills, experience, contact etc.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Made by <strong>Sparsh Shukla</strong> · Pinnacle Labs Internship 2026</p>
+    <p><small>Powered by Anthropic Claude API</small></p>
+  </footer>
+
+  <script src="src/app.js"></script>
+</body>
+</html>
